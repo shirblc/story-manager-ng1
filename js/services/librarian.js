@@ -11,7 +11,18 @@ angular.module('StoryManager')
 		//variable declaration
 		var vm = this;
 		this.myStories = {
-			stories: []
+			"stories": [{
+				"id": 1,
+				"name": "Sample Story",
+				"synopsis": "Sample synopsis",
+				"chapters": [
+					{
+						"number": 1,
+						"title": "Sample Chapter",
+						"synopsis": "Sample synopsis"
+					}
+				]
+			}]
 		};
 		
 		/*
