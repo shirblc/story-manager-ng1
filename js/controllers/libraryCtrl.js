@@ -8,11 +8,11 @@
 //library controller
 //contains all the stotries' basic data
 angular.module("StoryManager")
-	.controller("libraryCtrl", ['librarian', 'loadData', function(librarian, loadData) {
+	.controller("libraryCtrl", ['librarian', function(librarian) {
 		//variable declaration
 		var vm = this;
-		this.stories = loadData;
-		this.numStories = loadData.length;
+		this.stories = librarian.myStories.stories;
+		this.numStories = stories.length;
 		this.storiesDetails = getStoryDetails();
 		this.selectedStory = 0;
 		
@@ -30,7 +30,7 @@ angular.module("StoryManager")
 			
 			for(var i = 0; i < vm.numStories; i++)
 			{
-				var storyDetails = loadData[i];
+				var storyDetails = vm.stories[i];
 				var story = {
 					title: storyDetails.name, 
 					synopsis: storyDetails.synopsis,
