@@ -22,18 +22,84 @@ angular.module('StoryManager')
 					}
 				]
 			}];
+		this.currentlySelectedStory = 0;
 		
 		/*
-		Function Name: updateStories()
-		Function Description: 
-		Parameters: stories - the updated stories array (including the new/updated story/chapters or
-							without the deleted story/chapters).
+		Function Name: addStory()
+		Function Description: Add a new story.
+		Parameters: story - the newly added story.
 		----------------
 		Programmer: Shir Bar Lev.
 		*/
-		this.updateStories = function(stories)
-		{	
-			vm.myStories.stories = stories;
+		this.addStory = function(story)
+		{
+			vm.myStories.push(story);
+			vm.postToCache();
+		}
+		
+		/*
+		Function Name: deleteStory()
+		Function Description: Delete a story.
+		Parameters: storyNumber - the number of story to delete.
+		----------------
+		Programmer: Shir Bar Lev.
+		*/
+		this.deleteStory = function(storyNumber)
+		{
+			vm.myStories.splice(storyNumber - 1, 1);
+			vm.postToCache();
+		}
+		
+		/*
+		Function Name: editStory()
+		Function Description: Edit a story.
+		Parameters:  story - the new details of the story.
+								storyNumber - the number of story to edit.
+		----------------
+		Programmer: Shir Bar Lev.
+		*/
+		this.editStory = function(story, storyNumber)
+		{
+			vm.myStories[storyNumber - 1] = story;
+		}
+		
+		/*
+		Function Name: addChapter()
+		Function Description: Add a chapter.
+		Parameters: chapter - the new chapter to be added.
+		----------------
+		Programmer: Shir Bar Lev.
+		*/
+		this.addChapter = function(chapter)
+		{
+			vm.myStories[vm.currentlySelectedStory].chapters.push(chapter);
+			vm.postToCache();
+		}
+		
+		/*
+		Function Name: deleteChapter()
+		Function Description: Delete a chapter.
+		Parameters: chapterNum - the number of chapter to delete.
+		----------------
+		Programmer: Shir Bar Lev.
+		*/
+		this.deleteChapter = function(chapterNum)
+		{
+			vm.myStories[vm.currentlySelectedStory].chapters.splice(chapterNum - 1, 1);
+			vm.postToCache();
+		}
+		
+		/*
+		Function Name: editChapter()
+		Function Description: Edit a chapter.
+		Parameters:  chapter - the new details of the chapter.
+								chapterNum - the number of chapter to delete.
+		----------------
+		Programmer: Shir Bar Lev.
+		*/
+		this.editChapter = function(chapter, chapterNum)
+		{
+			vm.myStories[vm.currentlySelectedStory].chapters[chapterNum - 1] = chapter;
 			vm.postToCache();
 		}
 		
