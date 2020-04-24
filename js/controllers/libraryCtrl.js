@@ -11,8 +11,8 @@ angular.module("StoryManager")
 	.controller("libraryCtrl", ['librarian', function(librarian) {
 		//variable declaration
 		var vm = this;
-		this.stories = librarian.myStories.stories;
-		this.numStories = stories.length;
+		this.stories = librarian.myStories;
+		this.numStories = this.stories.length;
 		this.storiesDetails = getStoryDetails();
 		this.selectedStory = 0;
 		

@@ -10,8 +10,7 @@ angular.module('StoryManager')
 	.service('librarian', [function() {
 		//variable declaration
 		var vm = this;
-		this.myStories = {
-			"stories": [{
+		this.myStories = [{
 				"id": 1,
 				"name": "Sample Story",
 				"synopsis": "Sample synopsis",
@@ -22,8 +21,7 @@ angular.module('StoryManager')
 						"synopsis": "Sample synopsis"
 					}
 				]
-			}]
-		};
+			}];
 		
 		/*
 		Function Name: updateStories()
