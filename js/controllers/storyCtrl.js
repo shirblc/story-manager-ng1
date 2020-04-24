@@ -11,12 +11,11 @@ angular.module('StoryManager')
 	.controller('storyCtrl', ['$stateParams', 'librarian', '$state', function($stateParams, librarian, $state) {
 		//variable declaration
 		var vm = this;
-		this.stories = librarian.myStories.stories;
-		var storyDetails = vm.stories[$stateParams.id-1];
-		this.storyName = storyDetails.name;
-		this.storySynopsis = storyDetails.synopsis;
-		this.chapters = storyDetails.chapters;
-		this.storyID = storyDetails.id;
+		this.storyDetails = librarian.myStories[$stateParams.id-1];
+		this.storyName = this.storyDetails.name;
+		this.storySynopsis = this.storyDetails.synopsis;
+		this.chapters = this.storyDetails.chapters;
+		this.storyID = this.storyDetails.id;
 		this.chapter = loadChapterData();
 		this.forDeletion;
 		//the chapter being edited.
@@ -48,9 +47,9 @@ angular.module('StoryManager')
 		this.changeDetails = function() {
 			vm.storyName = document.getElementById("storyTitle").value;
 			vm.storySynopsis =  document.getElementById("storySynopsis").value;
-			vm.stories[vm.storyID-1].name = vm.storyName;
-			vm.stories[vm.storyID-1].synopsis = vm.storySynopsis;
-			librarian.updateStories(vm.stories);
+			vm.storyDetails.name = vm.storyName;
+			vm.storyDetails.synopsis = vm.storySynopsis;
+			librarian.editStory(vm.storyDetails);
 		};
 		
 		/*
@@ -81,22 +80,21 @@ angular.module('StoryManager')
 			//if the user requested to delete the story
 			if(vm.forDeletion == vm.storyName)
 				{
-					vm.stories.splice(vm.storyID-1, 1);
-					librarian.updateStories(vm.stories);
+					librarian.deleteStory(vm.storyID);
 					$state.go("home");
 				}
 			//if the user requested to delete all the chapters
 			else if(vm.forDeletion == "All chapters")
 				{
 					vm.chapters = [];
-					vm.stories[vm.storyID-1].chapters = [];
-					librarian.updateStories(vm.stories);
+					vm.storyDetails.chapters = [];
+					librarian.editStory(vm.storyDetails);
 				}
 			//if it's not either of those, the user requested to delete a chapter
 			else
 				{
 					var chapterNum = vm.forDeletion.substr(8,1);
-					vm.removeChapter(chapterNum);
+					librarian.deleteChapter(chapterNum);
 				}
 		};
 		
@@ -159,8 +157,8 @@ angular.module('StoryManager')
 					vm.chapters[chapterNumber-1].synopsis = document.getElementById("chapterSynopsis").value;
 				}
 			
-			vm.stories[vm.storyID-1].chapters = vm.chapters;
-			librarian.updateStories(vm.stories);
+			vm.storyDetails.chapters = vm.chapters;
+			librarian.editStory(vm.chapters, vm.storyID);
 			
 			vm.changeState();
 		}
@@ -230,8 +228,8 @@ angular.module('StoryManager')
 					});
 				}
 			
-			vm.stories[vm.storyID-1].chapters = vm.chapters;
-			librarian.updateStories(vm.stories);
+			vm.storyDetails.chapters = vm.chapters;
+			librarian.editStory(vm.storyDetails);
 			
 			//removes the modal box and popup
 			document.getElementById("modalBox").className = "off";
@@ -271,19 +269,5 @@ angular.module('StoryManager')
 			
 			document.getElementById("doneBtn").classList.add("off");
 			document.getElementById("doneBtn").classList.remove("on");
-		}
-		
-		/*
-		Function Name: removeChapter()
-		Function Description: Deletes a chapter.
-		Parameters: chapterNumber - number of the chapter to delete.
-		----------------
-		Programmer: Shir Bar Lev.
-		*/
-		this.removeChapter = function(chapterNumber)
-		{
-			vm.chapters.splice(chapterNumber, 1);
-			vm.stories[vm.storyID-1].chapters = vm.chapters;
-			librarian.updateStories(vm.stories);
 		}
 }]);

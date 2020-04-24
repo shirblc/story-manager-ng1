@@ -11,7 +11,7 @@ angular.module("StoryManager")
 	.controller("libraryCtrl", ['librarian', function(librarian) {
 		//variable declaration
 		var vm = this;
-		this.stories = librarian.myStories;
+		this.currentStory;
 		this.numStories = this.stories.length;
 		this.storiesDetails = getStoryDetails();
 		this.selectedStory = 0;
@@ -96,8 +96,7 @@ angular.module("StoryManager")
 				"chapters": []
 			};
 			
-			vm.stories.push(newStory);
-			librarian.updateStories(vm.stories);
+			librarian.addStory(newStory);
 			
 			document.getElementById("modalBox").className = "off";
 			document.getElementById("addPopUp").classList.remove("on");
