@@ -14,7 +14,7 @@ angular.module("StoryManager")
 		this.currentStory;
 		this.numStories = librarian.myStories.length;
 		this.storiesDetails = getStoryDetails();
-		this.selectedStory = 0;
+		this.selectedStory = librarian.getSelectedStory();
 		
 		/*
 		Function Name: getStoryDetails()
@@ -40,30 +40,6 @@ angular.module("StoryManager")
 			}
 			
 			return storyArray;
-		}
-
-		/*
-		Function Name: getSelectedStory()
-		Function Description: Returns the number of the currently selected story.
-		Parameters: None.
-		----------------
-		Programmer: Shir Bar Lev.
-		*/
-		this.getSelectedStory = function()
-		{
-			return vm.selectedStory;
-		}
-
-		/*
-		Function Name: setSelectedStory()
-		Function Description: Sets the number of the currently selected story.
-		Parameters: numSelected - new selected story.
-		----------------
-		Programmer: Shir Bar Lev.
-		*/
-		this.setSelectedStory = function(numSelected)
-		{
-			vm.selectedStory = numSelected;
 		}
 		
 		/*

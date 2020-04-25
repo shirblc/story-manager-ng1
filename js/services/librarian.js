@@ -24,6 +24,30 @@ angular.module('StoryManager')
 			}];
 		this.currentlySelectedStory = 0;
 		
+				/*
+		Function Name: getSelectedStory()
+		Function Description: Returns the number of the currently selected story.
+		Parameters: None.
+		----------------
+		Programmer: Shir Bar Lev.
+		*/
+		this.getSelectedStory = function()
+		{
+			return vm.selectedStory;
+		}
+
+		/*
+		Function Name: setSelectedStory()
+		Function Description: Sets the number of the currently selected story.
+		Parameters: numSelected - new selected story.
+		----------------
+		Programmer: Shir Bar Lev.
+		*/
+		this.setSelectedStory = function(numSelected)
+		{
+			vm.selectedStory = numSelected;
+		}
+		
 		/*
 		Function Name: addStory()
 		Function Description: Add a new story.
