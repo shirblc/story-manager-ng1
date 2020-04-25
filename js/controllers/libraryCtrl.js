@@ -12,7 +12,7 @@ angular.module("StoryManager")
 		//variable declaration
 		var vm = this;
 		this.currentStory;
-		this.numStories = this.stories.length;
+		this.numStories = librarian.myStories.length;
 		this.storiesDetails = getStoryDetails();
 		this.selectedStory = 0;
 		
@@ -30,7 +30,7 @@ angular.module("StoryManager")
 			
 			for(var i = 0; i < vm.numStories; i++)
 			{
-				var storyDetails = vm.stories[i];
+				var storyDetails = librarian.myStories[i];
 				var story = {
 					title: storyDetails.name, 
 					synopsis: storyDetails.synopsis,
