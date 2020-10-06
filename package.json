@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.28",
-    "angular": "^1.8.0",
+    "angular": "^1.8.1",
     "autoprefixer": "^9.8.6",
     "gulp-concat": "^2.6.1",
     "gulp-jasmine-browser": "^4.1.0",
